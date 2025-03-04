@@ -1,10 +1,22 @@
+<<<<<<< HEAD
 I like 1 very much
+=======
+I don't like 1
+>>>>>>> Vergil
 I like 2
 I like 3
 I like 4
 I like 5
 I like 6
 I like 7
+<<<<<<< HEAD
 I like 8
 I like 9
 I like 11
+=======
+I like 11
+I like 12
+I like 13
+I like 14
+I like 15
+>>>>>>> Vergil
