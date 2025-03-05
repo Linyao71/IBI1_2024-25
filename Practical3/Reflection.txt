@@ -1,0 +1,6 @@
+This is a reflection in IBI1_2024-25.
+
+During this course, I learnt how to get a repository from github from other people.
+I also learnt how to create my own repository and decorate it.
+I practiced the add, commit, branch, merge command for version control.
+I learnt a lot during this course.
