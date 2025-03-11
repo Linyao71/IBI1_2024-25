@@ -18,7 +18,7 @@ X=True
 Y=True
 W= X and Y
 print (W)
-
+#	truth	table	for	W
 # X     Y     W
 # True  False False
 # False True  False
