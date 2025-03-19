@@ -8,7 +8,7 @@
 # 4. Output the BMI value and weight category.
 
 weight= 60  #Store a person's weight (kg)
-height= 1.65  #Store a person's height (m)
+height= 1.65 #Store a person's height (m)
 print(f"the weight is {weight}, and the height is {height}")
 
 bmi=weight/(height**2) #Calculate BMI
@@ -16,7 +16,7 @@ bmi=weight/(height**2) #Calculate BMI
 #Determine weight categories
 if bmi < 18.5:
     category = "Underweight"
-elif 18.5 <= bmi <= 30:
+elif bmi <= 30:
     category = "normal weight"
 else:
     category = "Obesity"
