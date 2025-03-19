@@ -15,7 +15,7 @@ bmi=weight/(height**2) #Calculate BMI
 
 #Determine weight categories
 if bmi < 18.5:
-    category = "Underweight"
+        category = "Underweight"
 elif bmi <= 30:
     category = "normal weight"
 else:

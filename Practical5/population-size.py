@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 uk_countries = [57.11, 3.13, 1.91, 5.45] # store the population in list	"uk_countries"
 uk_countries_sorted = sorted(uk_countries) # in order of smallest to largest
 
-# population in	2022 of the	provinces in China which border Zhejiang province	
+# population in	2022 of the provinces in China which border Zhejiang province	
 china_provinces = [65.77, 41.88, 45.28, 61.27, 85.15] # store the population in list "china_provinces"
 china_provinces_sorted = sorted(china_provinces) # in order of smallest to largest
 
