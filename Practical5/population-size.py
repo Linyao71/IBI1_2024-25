@@ -1,6 +1,7 @@
+# 1. Create and sort 2 lists
+# 2. Draw 2 pie charts
 import matplotlib.pyplot as plt
 
-# 1. Create and sort 2 lists
 # population in 2022 of countries in the United Kingdom	
 uk_countries = [57.11, 3.13, 1.91, 5.45] # store the population in list	"uk_countries"
 uk_countries_sorted = sorted(uk_countries) # in order of smallest to largest
@@ -13,7 +14,6 @@ china_provinces_sorted = sorted(china_provinces) # in order of smallest to large
 print("UK countries population (millions):", uk_countries_sorted) #Print "uk_countries_sorted"
 print("Provinces border Zhejiang province population (millions):", china_provinces_sorted) #Print "china_provinces_sorted"
 
-# 2. Draw 2 pie charts
 # the pie chart for countries in the United Kingdom
 uk_country = ['England', 'Wales', 'Northern Ireland', 'Scotland'] # set country name
 plt.figure(figsize=(12, 7)) # create a new graphics window, set the width and height

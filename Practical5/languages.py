@@ -1,6 +1,9 @@
+# 1. form a dictionary
+# 2. construct a bar plot
+# 3. get the percentage of a specific language
+
 import matplotlib.pyplot as plt
 
-# 1. form a dictionary
 ## first line is "language name", second line is "percentage"
 language_percentage = {
     "JavaScript": 62.3,
@@ -11,7 +14,6 @@ language_percentage = {
 }
 print (language_percentage)
 
-# 2. construct a bar plot
 languages = list(language_percentage.keys()) # input "language name" into languages
 percentages = list(language_percentage.values()) # input "percentage" into percentages
 
@@ -28,7 +30,6 @@ plt.ylim(0, 70)
 plt.show() 
 # print the bar plot
 
-# 3. get the percentage of a specific language
 requested_language = "JavaScript" 
 # the specific language
 ## if want to get the percentage of other languages, modify this variable.
