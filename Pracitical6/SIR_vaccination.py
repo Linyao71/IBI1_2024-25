@@ -1,10 +1,9 @@
 # pseudocode：
 # 1.import necessary libraries
-# 2.define the basic variables of the model
-# 3.set initial conditions
-# 4.record time course simulation
-# 5.plot results
-# 6.save results
+# 2.define a SIRV model
+# 3.set variables
+# 4.plot results
+# 5.save results
 
 import numpy as np
 import matplotlib.pyplot as plt
