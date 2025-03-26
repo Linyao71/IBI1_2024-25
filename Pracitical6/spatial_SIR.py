@@ -66,5 +66,5 @@ def new(time_points):
     return img,
 
 # create animation
-ani=FuncAnimation(main, new, frames=time_points, interval=200, blit=False)
+ani=FuncAnimation(main, new, frames=time_points, interval=200, blit=False, repeat=False)
 plt.show()
