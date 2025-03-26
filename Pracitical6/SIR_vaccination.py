@@ -1,9 +1,8 @@
 # pseudocode：
 # 1.import necessary libraries
-# 2.define a SIRV model
-# 3.set variables
-# 4.plot results
-# 5.save results
+# 2.make a SIRV model with variables 
+# 3.input specific variables range 
+# 4.plot results with color change
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,10 +29,10 @@ def sirv(N, beta, gamma, vaccination_rate, time_points):
     
         # simulate new infections
         presus=max(0, presus)
-        newinf=int(np.random.choice(range(2), int(presus), p=[1-probinf, probinf]).sum())
+        newinf=int(np.random.choice(range(2), presus, p=[1-probinf, probinf]).sum())
     
         # simulate recoveries
-        newreco=int(np.random.choice(range(2), int(preinf), p=[1-gamma, gamma]).sum())
+        newreco=int(np.random.choice(range(2), preinf, p=[1-gamma, gamma]).sum())
     
         # update compartments
         sus.append(presus-newinf)
