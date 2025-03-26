@@ -2,9 +2,8 @@
 # 1.import necessary libraries
 # 2.define the basic variables of the model
 # 3.set initial conditions
-# 4.record time course simulation
+# 4.make and record time course simulation
 # 5.plot results
-# 6.save results
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -42,7 +41,7 @@ plt.figure(figsize=(6,4), dpi=150) # set up plot's dimensions and resolution
 plt.plot(sus, label='Susceptible')
 plt.plot(inf, label='Infected')
 plt.plot(re, label='Recovered')
-plt.xlabel('Time')
+plt.xlabel('Time (/days)')
 plt.ylabel('Number of People')
 plt.title('SIR Model Simulation (β=0.3, γ=0.05)')
 plt.legend() # show legends
