@@ -19,7 +19,6 @@ time_points=100  # Number of time steps
 
 # make array of allsusceptible population
 population=np.zeros((size,size)) # 0 = susceptible, 1 = infected, 2 = recovered
-population[4,12]
 
 # random initial outbreak
 outbreak = np.random.choice(range(size), 2)
