@@ -1,4 +1,3 @@
-import sys
 import re
 
 option = ['GTAG', 'GCAG', 'ATAC']
