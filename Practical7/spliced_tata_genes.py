@@ -25,21 +25,24 @@ currentname = 'unknown_gene'
 for line in input:
     if re.search ('>', line):  
         if currentseq:
-            full = ''.join(currentseq)
+            part = ''.join(currentseq)
 
-            while re.search(start, full):
-                 cut1 = re.search(start, full)
-                 place1 = cut1.start() 
-                 cut = full[place1:]
-                 cut2 = re.search(finish, cut)
+            while re.search(start, part):
+                cut1 = re.search(start, part)
+                place1 = cut1.start() 
+                cut = part[place1:]
+                cut2 = re.search(finish, cut)
 
-                 if cut2:
-                      place2 = cut2.start() + 2
-                      gene = cut[:place2]
-                      if re.search(tata, gene):
-                           number = len(re.findall(tata, gene))
-                           output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-                           full = cut[place2:]
+                if cut2:
+                    place2 = cut2.start() + 2
+                    gene = cut[:place2]
+                    if re.search(tata, gene):
+                        number = len(re.findall(tata, gene))
+                        output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
+                    part = cut[place2:]
+
+                else:
+                    break
 
         currentseq = ''
         getname = re.search(r'>(\S+)', line)
@@ -49,17 +52,26 @@ for line in input:
         currentseq += line.strip()
 
 if currentseq:
-     full = ''.join(currentseq)
-     while re.search(start, full):
-             cut = pattern.findall(full)
-             cut2 = re.search(finish, cut)
+    part = ''.join(currentseq)
 
-             if cut2:
-                  place2 = cut2.start() + 2
-                  gene = cut[:place2]
-                  if re.search(tata, gene):
-                       number = len(re.findall(tata, gene))
-                       output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-                       full = cut[place2:]
+    while re.search(start, part):
+        cut1 = re.search(start, part)
+        place1 = cut1.start() 
+        cut = part[place1:]
+        cut2 = re.search(finish, cut)
+
+        if cut2:
+            place2 = cut2.start() + 2
+            gene = cut[:place2]
+        
+            if re.search(tata, gene):
+                number = len(re.findall(tata, gene))
+                output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
+            part = cut[place2:]
+
+        else:
+            break
 
 print(f"Results saved to {output1}")
+input.close()
+output.close()
