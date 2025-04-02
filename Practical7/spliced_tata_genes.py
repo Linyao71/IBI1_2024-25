@@ -9,22 +9,28 @@ while True:
         break
     print("Meaningless input. Please choose from GTAG, GCAG, ATAC.")
 
+start = splice[:2]
+finish = splice[-2:]
+
 input = open ('tata_genes.fa','r')
 output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
+
+tata = re.compile(r'TATA[AT]A[AT]')
 currentseq = ''
 currentname = "unknown_gene"
 
 for line in input:
-    if bool(re.match ('>', line)):  
+    if re.search ('>', line):  
         if currentseq:
             full = ''.join(currentseq)
 
-            if re.search(splice, full):
-                 number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
+            if re.search(start, full):
+                 full = re.findall(r'([ACGT]+)', full)
+                 number = len(re.findall(r'TATA[AT]A[AT]', full))
                  output.write(f'>{currentname} TATA_count={number}\n{full}\n')
 
-        currentseq = []
+        currentseq = ''
         getname = re.search(r'>(\S+)', line)
         currentname = getname.group(1) if getname else "unknown_gene"
     
