@@ -11,7 +11,6 @@ while True:
     print("Meaningless input. Please choose from GTAG, GCAG, ATAC.")
 
 input = open ('tata_genes.fa','r')
-tata = re.compile(r'TATA[AT][AT]', re.IGNORECASE)
 output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
 currentseq = []
@@ -22,10 +21,9 @@ for line in input:
         if currentseq:
             full = ''.join(currentseq)
 
-            if tata.search(full):
-                if re.search(splice, full) and re.search(r'TATA[AT][AT]', full, re.IGNORECASE):
-                     number = len(re.findall(r'TATA[AT][AT]', full, re.IGNORECASE))
-                     output.write(f'>{currentname} TATA_count={number}\n{full}\n')
+            if re.search(splice, full) and re.search(r'TATA[AT]A[AT]', full, re.IGNORECASE):
+                 number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
+                 output.write(f'>{currentname} TATA_count={number}\n{full}\n')
 
         currentseq = []
         getname = re.search(r'>(\S+)', line)
@@ -36,8 +34,8 @@ for line in input:
 
 if currentseq:
         full = ''.join(currentseq)
-        if re.search(splice, full) and re.search(r'TATA[AT][AT]', full, re.IGNORECASE):
-            number = len(re.findall(r'TATA[AT][AT]', full, re.IGNORECASE))
+        if re.search(splice, full) and re.search(r'TATA[AT]A[AT]', full, re.IGNORECASE):
+            number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
             output.write(f'>{currentname} TATA_count={number}\n{full}\n')
 
 print(f"Results saved to {output1}")

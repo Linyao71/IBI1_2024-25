@@ -4,7 +4,7 @@ import sys
 import re
 
 input = open ('Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa','r')
-tata = re.compile(r'TATA[AT][AT]', re.IGNORECASE)
+tata = re.compile(r'TATA[AT]A[AT]', re.IGNORECASE)
 output = open('tata_genes.fa','w')
 currentseq = []
 currentname = "unknown_gene"
