@@ -7,7 +7,7 @@ currentseq=''
 currentname = "unknown_gene"
 
 for line in input:
-    if bool(re.match ('>', line)):  
+    if re.match ('>', line):  
         if currentseq:
             full = ''.join(currentseq)
             if tata.search(full):

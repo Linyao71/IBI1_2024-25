@@ -17,18 +17,29 @@ output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
 
 tata = re.compile(r'TATA[AT]A[AT]')
+pattern = re.compile(rf"{start}[ACGT]+") 
+
 currentseq = ''
-currentname = "unknown_gene"
+currentname = 'unknown_gene'
 
 for line in input:
     if re.search ('>', line):  
         if currentseq:
             full = ''.join(currentseq)
 
-            if re.search(start, full):
-                 full = re.findall(r'([ACGT]+)', full)
-                 number = len(re.findall(r'TATA[AT]A[AT]', full))
-                 output.write(f'>{currentname} TATA_count={number}\n{full}\n')
+            while re.search(start, full):
+                 cut1 = re.search(start, full)
+                 place1 = cut1.start() 
+                 cut = full[place1:]
+                 cut2 = re.search(finish, cut)
+
+                 if cut2:
+                      place2 = cut2.start() + 2
+                      gene = cut[:place2]
+                      if re.search(tata, gene):
+                           number = len(re.findall(tata, gene))
+                           output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
+                           full = cut[place2:]
 
         currentseq = ''
         getname = re.search(r'>(\S+)', line)
@@ -38,9 +49,17 @@ for line in input:
         currentseq += line.strip()
 
 if currentseq:
-        full = ''.join(currentseq)
-        if re.search(splice, full):
-            number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
-            output.write(f'>{currentname} TATA_count={number}\n{full}\n')
+     full = ''.join(currentseq)
+     while re.search(start, full):
+             cut = pattern.findall(full)
+             cut2 = re.search(finish, cut)
+
+             if cut2:
+                  place2 = cut2.start() + 2
+                  gene = cut[:place2]
+                  if re.search(tata, gene):
+                       number = len(re.findall(tata, gene))
+                       output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
+                       full = cut[place2:]
 
 print(f"Results saved to {output1}")
