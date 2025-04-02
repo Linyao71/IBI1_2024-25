@@ -12,7 +12,7 @@ while True:
 input = open ('tata_genes.fa','r')
 output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
-currentseq = []
+currentseq = ''
 currentname = "unknown_gene"
 
 for line in input:
@@ -29,7 +29,7 @@ for line in input:
         currentname = getname.group(1) if getname else "unknown_gene"
     
     else:
-        currentseq.append(line.strip())
+        currentseq += line.strip()
 
 if currentseq:
         full = ''.join(currentseq)

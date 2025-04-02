@@ -1,12 +1,9 @@
-
-
-import sys
 import re
 
 input = open ('Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa','r')
 tata = re.compile(r'TATA[AT]A[AT]', re.IGNORECASE)
 output = open('tata_genes.fa','w')
-currentseq = []
+currentseq=''
 currentname = "unknown_gene"
 
 for line in input:
@@ -16,12 +13,12 @@ for line in input:
             if tata.search(full):
                 at_sequences = re.findall(r'(AT[ACGT]+)', full)
                 output.write(f">{currentname}\n{full}\n")
-        currentseq = []
+        currentseq = ''
         match = re.search(r'gene:(\S+)', line)
         currentname = match.group(1) if match else "unknown_gene"
     
     else:
-        currentseq.append(line.strip())
+        currentseq += line.strip()
 
 if currentseq:
         full = ''.join(currentseq)
