@@ -21,7 +21,7 @@ for line in input:
         if currentseq:
             full = ''.join(currentseq)
 
-            if re.search(splice, full) and re.search(r'TATA[AT]A[AT]', full, re.IGNORECASE):
+            if re.search(splice, full):
                  number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
                  output.write(f'>{currentname} TATA_count={number}\n{full}\n')
 
@@ -34,7 +34,7 @@ for line in input:
 
 if currentseq:
         full = ''.join(currentseq)
-        if re.search(splice, full) and re.search(r'TATA[AT]A[AT]', full, re.IGNORECASE):
+        if re.search(splice, full):
             number = len(re.findall(r'TATA[AT]A[AT]', full, re.IGNORECASE))
             output.write(f'>{currentname} TATA_count={number}\n{full}\n')
 
