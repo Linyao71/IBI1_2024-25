@@ -35,7 +35,9 @@ print(dalys_data.iloc[0:2,:])
 print(dalys_data.iloc[0:10:2,0:5])'''
 
 '''print(dalys_data.iloc[0:10,2])
-tenthyear = dalys_data.iloc[9,2]
+
+afghanistan = dalys_data[dalys_data["Entity"] == "Afghanistan"]
+tenthyear = afghanistan_data.iloc[9,2]
 print(f"the 10th year for which DALYs were recorded in Afghanistan: {tenthyear}")'''
 
 '''# same as "print(dalys_data.iloc[0:3,[0,1,3]])""
