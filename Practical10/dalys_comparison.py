@@ -6,7 +6,7 @@ import numpy as np
 dalys_data = pd.read_csv("dalys-rate-from-all-causes.csv")
 
 uk = dalys_data.loc[dalys_data.Entity == "United Kingdom", ["DALYs", "Year"]]
-'''france = dalys_data.loc[dalys_data.Entity == "France", ['DALYs', 'Year']]
+france = dalys_data.loc[dalys_data.Entity == "France", ['DALYs', 'Year']]
 
 ukmean = uk['DALYs'].mean()
 francemean = france['DALYs'].mean()
@@ -16,7 +16,10 @@ if ukmean > francemean:
 elif ukmean < francemean:
     print("The mean DALYs for the France is larger than that of UK.")
 else:
-    print("the mean DALYs for the UK and France are equal.")'''
+    print("the mean DALYs for the UK and France are equal.")
+
+# output:
+# The mean DALYs for the UK is larger than that of France.
 
 plt.plot(uk.Year, uk.DALYs, 
          markersize=4,       # Kky tick size
@@ -29,11 +32,4 @@ plt.plot(uk.Year, uk.DALYs,
          label="DALYs in the UK") 
 
 plt.xticks(uk.Year,rotation=-60)
-plt.show()
-
-data_1990 = dalys_data[dalys_data.Year == 1990]
-
-plt.boxplot(data_1990.DALYs, vert=False)
-plt.title('DALYs Distribution Across Countries in 1990')
-plt.xlabel('DALYs')
 plt.show()

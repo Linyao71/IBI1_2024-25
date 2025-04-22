@@ -1,0 +1,2 @@
+1. By comparing the distribution of DALYs for all countries in 1990, 
+   try to identify the outliers and high-burden countries.
