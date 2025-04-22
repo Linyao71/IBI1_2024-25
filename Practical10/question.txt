@@ -1,2 +1,25 @@
-1. By comparing the distribution of DALYs for all countries in 1990, 
-   try to identify the outliers and high-burden countries.
+1. By comparing the distribution of DALYs for all countries in 1990, try to identify the outliers
+   > line number in dalys_question.py to answer this question:  line 7 ~ 30
+
+   > The upper outliers are as follows:
+                             Entity      DALYs
+     1860                   Eritrea  115120.37
+     3270                   Liberia  110283.22
+     1950                  Ethiopia  107283.27
+     4140                     Niger  106064.27
+     1050  Central African Republic  105411.10
+     No lower outliers were found.
+     Within the offered statistics, the above countries have higher DALYs and greater disease burden
+
+2. draw a plot of this distribution mentioned in question 1
+    > line number in dalys_question.py to answer this question:  line 32 ~ 53
+
+    > boxplot.png
+     More directly showed the distribution of DALYs for all countries in 1990
+
+3. Compare the differences in the DALYs trends between China and the UK from 1990 to 2019
+    > line number in dalys_question.py to answer this question:  line 55 ~ 70
+
+    > trend.png
+     China's DALYs is significantly higher than that of the UK, 
+     but the improvement trend is more obvious
