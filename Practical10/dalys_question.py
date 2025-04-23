@@ -58,7 +58,7 @@ mask = dalys_data['Entity'].isin(country)
 subset = dalys_data[mask]
 
 for cou in country:
-    countrydata = subset[subset['Entity'] == cou]
+    countrydata = subset[subset.Entity == cou]
     plt.plot(countrydata['Year'], countrydata['DALYs'], label=cou)
 
 plt.title('DALYs Trend: China vs UK (1990-2019)')
