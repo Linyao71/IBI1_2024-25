@@ -49,8 +49,8 @@ plt.text(0.98, 0.75, stats_text,
          bbox=dict(facecolor='white', alpha=0.8))
 
 plt.tight_layout()
-plt.show()
 plt.savefig("boxplot.png", dpi=300, bbox_inches='tight')
+plt.show()
 
 # question 3
 country = ['China', 'United Kingdom']
@@ -66,5 +66,5 @@ plt.xlabel('Years')
 plt.ylabel('DALYs')
 plt.legend()
 plt.grid(True)
-plt.show()
 plt.savefig("trend.png", dpi=300, bbox_inches='tight')
+plt.show()
