@@ -1,0 +1,23 @@
+1. The length of the human SOD2 protein: 222 amino acids
+2. The subcellular localisation	of the human SOD2 protein: Mitochondrion matrix
+3. The range of percentage identities in the reported online BLAST results: 83.3-100%
+4. The percentage identity of the best alignment with the mouse SOD2 protein (UniProt ID: P09671): 90.1%
+
+workflow:
+1. Get 2 protein sequences from UniProt
+2. Generate a random sequence of same length
+3. Get the BLOSUM62 matrix
+4. Get the alignment score abd percentage of identical amino acids with BLOSUM62
+5. Calculate percentage identity
+6. Print results
+
+5. The alignment score and percentage of identical amino acids for each of the three comparisons:
+    Alignment results:
+    Human vs Mouse - alignment score: 20, Percent edit distance: 14.08%, Percent Identity: 85.92%
+    Human vs Random - alignment score: 133, Percent edit distance: 93.66%, Percent Identity: 6.34%
+    Mouse vs Random - alignment score: 134, Percent edit distance: 94.37%, Percent Identity: 5.63%
+
+statement:
+Human and mouse sequences are most closely related among human,mouse and random sequences.
+As the alignment score of human VS mouse group is the smallest one, and the percent identity is the largest one.
+ 
