@@ -29,18 +29,17 @@ def calculate_alignment_score(seq1, seq2, matrix):
         if seq1[i]!=seq2[i]:
             edit_distance += 1
 
-    percent_distance = (edit_distance) / len(seq1) * 100
     percent_identity = ((len(seq1)-edit_distance) / len(seq1)) * 100
-    return edit_distance, percent_distance, percent_identity
+    return edit_distance, percent_identity
 
 human_seq = get_uniprot_sequence("P69905")
 mouse_seq = get_uniprot_sequence("P01942")
 random_seq = generate_random_protein_sequence(len(human_seq))
 
 # Calculate scores
-human_mouse_score, human_mouse_distance, human_mouse_identity = calculate_alignment_score(human_seq, mouse_seq, blosum62)
-human_random_score, human_random_distance, human_random_identity = calculate_alignment_score(human_seq, random_seq, blosum62)
-mouse_random_score, mouse_random_distance, mouse_random_identity = calculate_alignment_score(mouse_seq, random_seq, blosum62)
+human_mouse_score, human_mouse_identity = calculate_alignment_score(human_seq, mouse_seq, blosum62)
+human_random_score, human_random_identity = calculate_alignment_score(human_seq, random_seq, blosum62)
+mouse_random_score, mouse_random_identity = calculate_alignment_score(mouse_seq, random_seq, blosum62)
         
 
 # Print results
@@ -49,6 +48,6 @@ print("Mouse sequence:", mouse_seq)
 print("Random sequence:", random_seq)
 print(f"sequence length: {len(human_seq)}")
 print("\nAlignment results:")
-print(f"Human vs Mouse - alignment score: {human_mouse_score}, Percent edit distance: {human_mouse_distance:.2f}%, Percent Identity: {human_mouse_identity:.2f}%")
-print(f"Human vs Random - alignment score: {human_random_score}, Percent edit distance: {human_random_distance:.2f}%, Percent Identity: {human_random_identity:.2f}%")
-print(f"Mouse vs Random - alignment score: {mouse_random_score}, Percent edit distance: {mouse_random_distance:.2f}%, Percent Identity: {mouse_random_identity:.2f}%")
+print(f"Human vs Mouse - alignment score: {human_mouse_score}, Percent Identity: {human_mouse_identity:.2f}%")
+print(f"Human vs Random - alignment score: {human_random_score}, Percent Identity: {human_random_identity:.2f}%")
+print(f"Mouse vs Random - alignment score: {mouse_random_score}, Percent Identity: {mouse_random_identity:.2f}%")
