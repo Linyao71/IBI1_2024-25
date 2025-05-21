@@ -41,26 +41,31 @@ class GOHandler(xml.sax.ContentHandler):
 # Function to analyze the XML file using DOM
 def analyze_with_dom(xml_file):
     start_time = time.time()
-    
-    with open(xml_file, "r", encoding="utf-8") as f:
-        xml_content = f.read()
-    xml_content = xml_content.replace("&", "&amp;")
-        
-    dom = xml.dom.minidom.parseString(xml_content)
+
+    # Parse the XML file directly instead of reading as string
+    dom = xml.dom.minidom.parse(xml_file)
     terms = dom.getElementsByTagName("term")
         
     results = {"molecular_function": {"max_count": -1, "term": None},
         "biological_process": {"max_count": -1, "term": None},
         "cellular_component": {"max_count": -1, "term": None}}
-        
+            
     for term in terms:
         namespace = term.getElementsByTagName("namespace")[0].firstChild.data
         is_a_count = len(term.getElementsByTagName("is_a"))
-        return results, time.time() - start_time
+        
+        if namespace in results and is_a_count > results[namespace]["max_count"]:
+            results[namespace]["max_count"] = is_a_count
+            term_id = term.getElementsByTagName("id")[0].firstChild.data
+            term_name = term.getElementsByTagName("name")[0].firstChild.data
+            results[namespace]["term"] = {"id": term_id, "name": term_name, "is_a_count": is_a_count}
+                
+    return results, time.time() - start_time
 
 # Function to analyze the XML file using SAX
 def analyze_with_sax(xml_file):
     start_time = time.time()
+
     handler = GOHandler()
     parser = xml.sax.make_parser()
     parser.setContentHandler(handler)
@@ -70,7 +75,7 @@ def analyze_with_sax(xml_file):
     results = {"molecular_function": {"max_count": -1, "term": None},
         "biological_process": {"max_count": -1, "term": None},
         "cellular_component": {"max_count": -1, "term": None}}
-        
+            
     for term in handler.terms:
         namespace = term["namespace"]
         is_a_count = term["is_a_count"]
@@ -78,10 +83,10 @@ def analyze_with_sax(xml_file):
         if namespace in results and is_a_count > results[namespace]["max_count"]:
             results[namespace]["max_count"] = is_a_count
             results[namespace]["term"] = {"id": term["id"], "name": term["name"], "is_a_count": is_a_count}
-        
-        return results, time.time() - start_time
+            
+    return results, time.time() - start_time
 
-def print_results(results, api_name, time_taken):
+def print_results(results, api_name, time_taken):    
     print(f"\n{api_name} Result:")
     print(f"handling time: {time_taken:.4f} s")
     
@@ -96,16 +101,19 @@ def print_results(results, api_name, time_taken):
 xml_file = "go_obo.xml"
     
 dom_results, dom_time = analyze_with_dom(xml_file)
-if dom_results:
-    print_results(dom_results, "DOM API", dom_time)
+print_results(dom_results, "DOM API", dom_time)
     
 sax_results, sax_time = analyze_with_sax(xml_file)
-if sax_results:
-    print_results(sax_results, "SAX API", sax_time)
+print_results(sax_results, "SAX API", sax_time)
     
-if dom_results and sax_results:
-    fastest = "SAX" if sax_time < dom_time else "DOM"
-    print("\nPerformance comparison results:")
-    print(f"DOM processing time: {dom_time:.4f} s")
-    print(f"SAX processing time: {sax_time:.4f} s")
-    print(f"Fastest API: {fastest}")
+fastest = "SAX" if sax_time < dom_time else "DOM"
+print("\nPerformance comparison results:")
+print(f"DOM processing time: {dom_time:.4f} s")
+print(f"SAX processing time: {sax_time:.4f} s")
+print(f"Fastest API: {fastest}")
+
+'''
+DOM processing time: 13.6852 s
+SAX processing time: 2.8151 s
+Fastest API: SAX
+'''
