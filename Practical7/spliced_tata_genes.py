@@ -17,7 +17,6 @@ output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
 
 tata = re.compile(r'TATA[AT]A[AT]')
-pattern = re.compile(rf"{start}[ACGT]+") 
 
 currentseq = ''
 currentname = 'unknown_gene'
@@ -32,6 +31,7 @@ for line in input:
                 place1 = cut1.start() 
                 cut = part[place1:]
                 cut2 = re.search(finish, cut)
+                part = part[place1+2:]
 
                 if cut2:
                     place2 = cut2.start() + 2
@@ -39,14 +39,13 @@ for line in input:
                     if re.search(tata, gene):
                         number = len(re.findall(tata, gene))
                         output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-                    part = cut[place2:]
 
                 else:
                     break
 
         currentseq = ''
         getname = re.search(r'>(\S+)', line)
-        currentname = getname.group(1) if getname else "unknown_gene"
+        currentname = getname.group(1)
     
     else:
         currentseq += line.strip()
@@ -59,6 +58,7 @@ if currentseq:
         place1 = cut1.start() 
         cut = part[place1:]
         cut2 = re.search(finish, cut)
+        part = part[place1+2:]
 
         if cut2:
             place2 = cut2.start() + 2
@@ -67,7 +67,6 @@ if currentseq:
             if re.search(tata, gene):
                 number = len(re.findall(tata, gene))
                 output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-            part = cut[place2:]
 
         else:
             break
