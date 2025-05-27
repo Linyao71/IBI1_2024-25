@@ -13,9 +13,9 @@ workflow:
 
 5. The alignment score and percentage of identical amino acids for each of the three comparisons:
     Alignment results:
-        Human vs Mouse - alignment score: 20, Percent Identity: 85.92%
-        Human vs Random - alignment score: 132, Percent Identity: 7.04%
-        Mouse vs Random - alignment score: 134, Percent Identity: 5.63%
+        Human vs Mouse - alignment score: 1097.0, Percent Identity: 90.09%
+        Human vs Random - alignment score: -266.0, Percent Identity: 3.15%
+        Mouse vs Random - alignment score: -275.0, Percent Identity: 3.15%
 
 statement:
 Human and mouse sequences are most closely related among human,mouse and random sequences.

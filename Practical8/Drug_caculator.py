@@ -42,5 +42,5 @@ print (f"the required volume of paracetamol is {V}ml")
 >Meaningless input. Please choose beteen 120mg/5ml and 250mg/5ml.
 >please input the required mass of niacinamide corresponding to 5ml of solution (120 or 250): 
 >120
->the required volume of paracetamol is 1.25
+>the required volume of paracetamol is 1.25ml
 '''
