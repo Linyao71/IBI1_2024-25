@@ -2,6 +2,7 @@ import re
 
 option = ['GTAG', 'GCAG', 'ATAC']
 
+# Prompt user for splice donor/acceptor combination
 print("possible splice donor/acceptor combinations: GTAG, GCAG, ATAC")
 while True:
     splice = input("input a splice combination: ").strip().upper()
@@ -9,68 +10,41 @@ while True:
         break
     print("Meaningless input. Please choose from GTAG, GCAG, ATAC.")
 
-start = splice[:2]
-finish = splice[-2:]
+# Compile the regular expression for splice donor/acceptor
+splice_tata = re.compile(splice[:2]+ r'.*'+ splice[-2:])
 
+# Open the input file and output file
 input = open ('tata_genes.fa','r')
 output1 = f'{splice}_spliced_genes.fa'
 output = open (output1,'w')
 
+# Compile the regular expression for TATA box
 tata = re.compile(r'TATA[AT]A[AT]')
-
 currentseq = ''
-currentname = 'unknown_gene'
+currentname = "unknown_gene"
 
+# Process the input file line by line
 for line in input:
+
     if re.search ('>', line):  
         if currentseq:
-            part = ''.join(currentseq)
-
-            while re.search(start, part):
-                cut1 = re.search(start, part)
-                place1 = cut1.start() 
-                cut = part[place1:]
-                cut2 = re.search(finish, cut)
-                part = part[place1+2:]
-
-                if cut2:
-                    place2 = cut2.start() + 2
-                    gene = cut[:place2]
-                    if re.search(tata, gene):
-                        number = len(re.findall(tata, gene))
-                        output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-
-                else:
-                    break
+            if re.search(splice_tata, currentseq):
+                number = len(re.findall(tata, currentseq))
+                if number > 0:
+                    output.write(f'>{currentname} TATA count={number}\n{currentseq}\n')
 
         currentseq = ''
         getname = re.search(r'>(\S+)', line)
-        currentname = getname.group(1)
-    
+
     else:
         currentseq += line.strip()
 
+# process the last sequence
 if currentseq:
-    part = ''.join(currentseq)
+    if re.search(splice_tata, currentseq):
+        number = len(re.findall(tata, currentseq))
+        if number > 0:
+            output.write(f'>{currentname} TATA count={number}\n{currentseq}\n')
 
-    while re.search(start, part):
-        cut1 = re.search(start, part)
-        place1 = cut1.start() 
-        cut = part[place1:]
-        cut2 = re.search(finish, cut)
-        part = part[place1+2:]
-
-        if cut2:
-            place2 = cut2.start() + 2
-            gene = cut[:place2]
-        
-            if re.search(tata, gene):
-                number = len(re.findall(tata, gene))
-                output.write(f'>{currentname} TATA_count={number}\n{gene}\n')
-
-        else:
-            break
-
+# tell the user the results are saved
 print(f"Results saved to {output1}")
-input.close()
-output.close()
